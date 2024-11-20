@@ -43,7 +43,7 @@ If you choose the second method, make sure to change the path in the code to mat
 ### Running the script
 Once you finish all the steps above, simply run
 ```
-python3 outputSoftmaxNonZeroRatio.py
+python3 main.py
 ```
 
 Once the GPU is setup, the script will prompt you to choose the method you wish to load the model. For more details, read the prompt and the "Setting up for the models" section above
