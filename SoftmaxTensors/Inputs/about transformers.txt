@@ -1,0 +1,14 @@
+In neural networks, especially transformers, attention mechanisms play 
+a vital role in tasks like language processing and vision. Could you explain 
+the core concept of how attention works, particularly the roles of query, key, 
+and value vectors, and how they are derived from the input? In the scaled dot-product 
+attention used in transformers, why is the dot product of query and key vectors scaled by 
+the square root of the key dimension, and how does this scaling affect the stability of training? 
+After computing attention scores, why is softmax applied, and how does the resulting probability 
+distribution influence the contribution of each value vector in the output? Furthermore, how does 
+multi-head attention capture relationships differently from single-head attention, and what is the 
+significance of concatenating and projecting these heads? In self-attention, how does each token 
+attend to others within the sequence, and how does this improve the model's ability to capture 
+long-term dependencies? Finally, in encoder-decoder attention, how do the encoder outputs function 
+as keys and values in the decoder, and why is this essential for tasks like machine translation 
+compared to self-attention?
