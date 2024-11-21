@@ -151,6 +151,27 @@ prompt_context_length = len(tokenizer.encode(inputs[0]))
 encoded_inputs = tokenizer(inputs, return_tensors='pt', padding=True)
 input_ids = encoded_inputs['input_ids'].to(device)
 attention_mask = encoded_inputs['attention_mask'].to(device)
+# attention_mask = torch.zeros_like(input_ids, dtype=torch.long).to(device)
+
+print("Writing mask...")
+filename = f"mask.txt"
+filepath = os.path.join(output_dir, filename)
+with open(filepath, 'w') as f:
+    np.savetxt(f, encoded_inputs['attention_mask'], fmt="%.6f")
+
+print("Writing input...")
+filename = f"input.txt"
+filepath = os.path.join(output_dir, filename)
+with open(filepath, 'w') as f:
+    np.savetxt(f, encoded_inputs['input_ids'], fmt="%.6f")
+
+print("Here's some helpful information...")
+print("Input tokens:", input_ids)
+print("Input shape:", input_ids.shape)
+print("Mask:", attention_mask)
+print("Mask shape:", attention_mask.shape)
+print("Prompt context length:", prompt_context_length)
+print("Max sequence length:", tokenizer.model_max_length)
 
 print("Starting inference...")
 
@@ -160,7 +181,8 @@ responseFilepath = os.path.join(output_dir, responseFilename)
 with open(responseFilepath, "w") as response_file:
     try:
         with torch.no_grad():
-            outputs = model.generate(input_ids, attention_mask=attention_mask)
+            outputs = model.generate(input_ids, attention_mask=attention_mask, max_length=4096)
+            # outputs = model.generate(input_ids, attention_mask=None)
         
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
         output_context_length = len(tokenizer.encode(decoded_outputs[0]))
